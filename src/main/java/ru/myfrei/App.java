@@ -11,47 +11,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 
 public class App {
-
-    static class Job {
-        String id;
-        String name;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
-
-    static class HH {
-        List<Job> items;
-
-        public List<Job> getItems() {
-            return items;
-        }
-
-        public void setItems(List<Job> items) {
-            this.items = items;
-        }
-
-        HH() {
-
-        }
-    }
-
 
     public static void main(String[] args) {
 
@@ -71,8 +32,8 @@ public class App {
                     System.out.println(body);
                     HH hh = mapper.readValue(body, HH.class);
                     hh.items.subList(0, 5).forEach(job -> {
-                        bot.execute(new SendMessage(it.message().chat().id(), "Вакансия: "
-                                + job.name + "\nСсылка: http://hh.ru/vacancy/" + job.id));
+                        bot.execute(new SendMessage(it.message().chat().id(), "Название вакансии: "
+                                + job.name + "\nСсылка: https://hh.ru/vacancy/" + job.id));
                         System.out.println(job.id + " " + job.name);
                     });
                     response.body();
